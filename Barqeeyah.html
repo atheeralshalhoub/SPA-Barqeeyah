@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1">
+
+    <title>برقية</title>
+
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="https://npmcdn.com/react-router@3.0.2/umd/ReactRouter.min.js"></script>
+  <link  rel="stylesheet" type="text/css" href="style.css" /> 
+  <link href="form.js" /> 
+  <style>
+    .active {
+    background-color: rgba(255,244,68,20);
+
+  }
+  
+  </style>
+</head>
+
+<body  >
+  
+  <div id="container">
+  </div>
+  
+  <script type="text/babel">
+
+var { Router,
+      Route,
+      IndexRoute,
+      IndexLink,
+      hashHistory,
+      Link } = ReactRouter;
+      
+    var destination = document.querySelector("#container");
+
+   
+
+
+    var App = React.createClass({
+  render: function() {
+    return (
+      <div>
+          <a class="topright" href="index.php">
+  <img src= "img/logo2.png" />
+</a>
+        <ul className="header">
+          
+            <li><Link to="/signin" activeClassName="active">تسجيل الدخول</Link></li>
+            <li><Link to="/signup" activeClassName="active">التسجيل</Link></li>
+            <li><Link to="/services" activeClassName="active">خدماتنا</Link></li>
+            <li><Link to="/about" activeClassName="active">ماهي برقية؟</Link></li>
+            <li><IndexLink to="/" activeClassName="active">الرئيسة</IndexLink></li>
+        </ul>
+
+        <div className="content">
+            {this.props.children}
+        </div>
+
+        
+      </div>
+    );
+  }
+});
+
+var Home = React.createClass({
+  propTypes: {
+    value: React.PropTypes.object.isRequired
+  },
+
+  render: function() {
+    return (
+      <div> 
+          
+<h2  className="center">
+مرحبا بك في خدمة برقية</h2>
+  <h2 className="center">اشترك في القائمة البريدية ليتم إعلامك عند انطلاقها</h2>
+  
+  <form method="post" action="index.php">  
+                <input className="mail" type="text"/> 
+                <p> </p>
+                <button type="submit">اشترك الآن</button> 
+                <p> </p>
+                <button type="submit">إلغاء الاشتراك</button>
+                
+                
+               
+            </form>
+
+</div>
+    );
+  }
+});
+
+
+var About= React.createClass({
+  render: function() {
+      return (
+        <div>
+          <h2>ماهي برقية؟</h2>
+          <p className="text" dir="rtl">
+              
+   في دوامة الحياة ومشاغلها التي تزداد يوما بعد آخر
+      ،من الطبيعي جدا أن يصيب الانسان بعض النسيان
+      لكن في كثير من الاحيان يكون ثمن هذا النسيان باهظا 
+      ! من هذا المنطلق تم توفير خدمة برقية
+      التي ستوفر الجهد والوقت لعملائها بإستلام الرسائل
+      أيا كانت نصية أو وسائط وارسالها للمستقبل في التاريخ والوقت المحدد
+      كل هذا سيتم بشكل آلي وفق جدولة العميل أي أن احتمال النسيان مستحيل!
+      
+          </p>
+        </div>
+      );
+    }
+});
+ 
+var Services = React.createClass({
+  render: function() {
+      return (
+        <div>
+          <h2>خدماتنا</h2>
+          <p className="text"> 
+              تتسم خدمة برقية بالمرونة العالية، 
+              حيث يمكن اختيار ما إذا كانت الرسالة ترسل إلى رقم جوال أو بريد الكتروني
+               وفي حال كانت إلى رقم جوال سيتم إرسال الرسالة كرسالة واتساب 
+              وفي حال عدم توفر واتساب سيتم إرسالها إلى تليجرام
+              وإذا لم يتوفر تيليجرام سيتم إرسالها كرسالة نصية قصيرة كل هذا يُوفر مجاناً 
+                    </p>
+        </div>
+      );
+    }
+});
+
+
+
+var SignUp = React.createClass({
+  render: function() {
+      return (
+
+
+        <div>
+          <form dir="rtl" action="register2.php" method="post" autocomplete="on" >
+          <fieldset>
+                <legend> التسجيل </legend>
+                <p> 
+                                    <label for="usernamesignup">*اسم المستخدم</label>
+                                    <input class="center5" id="usernamesignup" name="usernamesignup" required="required" type="text" />
+                                </p>
+                                <p> 
+                                    <label for="lastnamesignup">* الإسم الأخير</label>
+                                    <input  type="text" class="center5" id="lastnamesignup" name="lastnamesignup" required="required" /> 
+                                </p>
+                                
+                                  <p> 
+                                    <label for="emailsignup">* البريد الالكتروني</label>
+                                    <input type="email" class="center5" id="emailsignup" name="emailsignup" required="required" /> 
+                                </p>
+                              
+                               <p> 
+                                    <label for="passwordsignup">* كلمة المرور</label>
+                                    <input type="password" class="center5" id="passwordsignup" name="passwordsignup" required="required" /> 
+                                </p>
+                               <p> 
+                                    
+                                    <input type="checkbox" id="privacy" required="required"/> <label for="privacy"><a>أوافق على سياسة الخصوصية</a></label>
+                                </p>
+                
+                  <p> 
+                                    
+                                    <input type="checkbox" id="service" required="required"/> <label for="service"><a>أوافق على بنود الخدمة</a></label>
+                                </p>
+
+                                
+             <p><button type="submit" class="button">تسجيل</button> </p>
+
+
+
+							
+								<p>	<Link to="/signin" activeClassName="active">لديك حساب في الموقع؟</Link></p>
+							
+                                
+								
+              
+
+              </fieldset>
+            </form>
+
+
+        </div>
+      );
+    }
+});
+
+
+var SignIn = React.createClass({
+  render: function() {
+      return (
+        <div>
+            <form dir="rtl"class="pure-form pure-form-stacked">
+    <fieldset>
+        <legend>تسجيل الدخول</legend>
+                                        <p> 
+                                    <label for="emailsignin">* البريد الالكتروني</label>
+                                    <input type="email" class="center5" id="emailsignin" name="emailsignin" required="required" /> 
+                                </p>
+                              
+                               <p> 
+                                    <label for="passwordsignin">* كلمة المرور</label>
+                                    <input type="password" class="center5" id="passwordsignin" name="passwordsignin" required="required" /> 
+                                </p>
+                                <p><button type="submit" class="button">تسجيل الدخول</button> </p>
+
+                                <p>
+                                <label for="passwordsignin">لست عضو معنا بعد ؟ <Link to="/signup" activeClassName="active">بادر بالتسجيل الأن</Link></label>
+                                </p>
+
+
+    </fieldset>
+</form>
+        </div>
+      );
+    }
+});
+
+var controlPanel= React.createClass({
+  render: function() {
+      return (
+        <div>
+          
+        </div>
+      );
+    }
+});
+
+var TermsOfServices = React.createClass({
+  render: function() {
+      return (
+  
+<div>
+    <p className="text">
+:نشكرك على استخدام خدمة برقية، بإستخدام خدمة برقية فإنك توافق على التالي 
+<ol>
+<li> عدم  إساءة استخدام الخدمة حيث أنه قد يعرض حسابك للإيقاف، ويقصد بإساءة الاستخدام- 
+.استغلال الخدمة لنشر رسائل سبام, الدعاية والإعلان أو رسائل ذات محتوى مسيء </li>
+<li> قد تصلك رسائل إعلان عن جديد خدماتنا أو رسائل إدارة وما إلى آخره مع العلم أنه بإمكانك تعطيل خاصية الرسائل- </li>
+<li>.يجب مراعاة حقوق الملكية الفكرية وعدم انتهاكها، في حال وصول شكوى انتهاك للحقوق الفكرية سيتم إيقاف الحساب-</li>
+<li>.تستطيع إلغاء الاشتراك عن طريق الضغط على زر إلغاء الاشتراك في الصفحة الرئيسية- </li>
+<li>.يخلي فريق خدمة برقية مسؤوليته عن المحتوى المرسل حيث أن المستخدم هو المسؤول عن المحتوى وعن أي شكوى أو قضايا بخصوص المحتوى- </li>
+<li>.الموافقة على عرض الإعلانات على بعض خدمات برقية من قبل فريق برقية أو أي طرف ثالث- </li>
+<li>.بنود الخدمة قد تحدث بشكل دوري لذا ننوه بأن عليك مراجعتها بشكل دوري لمعرفة أي تغيير يطرأ مستقبلاً- </li>
+</ol>
+</p>
+  </div>
+
+      );
+    }
+});
+
+var privacyPolicy = React.createClass({
+  render: function() {
+      return (
+  
+  <div>
+    <p className="text"> 
+:نشكرك على استخدام خدمة برقية، بإستخدام خدمة برقية فإنك توافق على التالي
+	:من منطلق الحرص والسعي لتقديم خدمة أفضل يتم جمع بيانات الاستخدام وهي كالتالي • 
+كيفية استخدام الخدمة  #
+معلومات السجلات الهاتفية #
+معلومات سجلات البريد الإلكتروني #
+معلومات توجيه الرسائل #
+عنوان بروتوكول الإنترنت #
+معلومات الموقع # 
+		.الملفات النصية (كوكيز) بحيث يمكن متابعة سلوك المستخدم لتقييم فعالية الموقع وتطويره وقد تستخدم لاستهداف الإعلانات #
+        يلتزم فريق خدمة برقية إلتزاماً تاماً بحفظ معلومات حسابك الخاصة بك واستخدام معايير أمنية عالية •
+         .للحفاظ على معلوماتك الشخصية ومنع أي انتهاكات مستقبلية 
+		 .سياسة الخصوصية قد تحدث بشكل دوري لذا ننوه بأن عليك مراجعتها بشكل دوري لمعرفة أي تغيير يطرأ مستقبلاً •
+      </p>
+  </div>
+      );
+    }
+});
+
+
+
+
+    ReactDOM.render(
+       <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Home}/>
+      <Route path="about" component={About} />
+      <Route path="services" component={Services} />
+      <Route path="signup" component={SignUp}>
+          <Route path="termsofservices" component={TermsOfServices}/>
+          <Route path="privacyPolicy" component={privacyPolicy}/>
+        </Route>
+      <Route path="signin" component={SignIn}/>
+      <Route path="controlPanel" component={controlPanel}/>
+     
+    </Route>
+  </Router>,
+  destination
+    );
+  </script>
+</body>
+  
+</html>
